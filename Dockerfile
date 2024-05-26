@@ -1,11 +1,22 @@
-FROM python:3.9-slim
+FROM jupyter/scipy-notebook
 
-WORKDIR /app
+RUN pip install joblib
 
-COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+USER root
+RUN apt-get update && apt-get install -y jq
 
-COPY . .
+RUN mkdir model raw_data processed_data results
 
-CMD ["python", "app.py"]
+
+ENV RAW_DATA_DIR=/home/raw_data
+ENV PROCESSED_DATA_DIR=/home/processed_data
+ENV MODEL_DIR=/home/model
+ENV RESULTS_DIR=/home/results
+ENV RAW_DATA_FILE=hello.txt
+
+
+COPY heart.csv ./raw_data/hello.txt
+COPY preprocessing.py ./preprocessing.py
+COPY train.py ./train.py
+COPY test.py ./test.py
