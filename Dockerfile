@@ -16,7 +16,7 @@ ENV RESULTS_DIR=/home/results
 ENV RAW_DATA_FILE=hello.txt
 
 
-COPY heart.csv ./raw_data/hello.txt
+COPY hello.txt ./raw_data/hello.txt
 COPY preprocessing.py ./preprocessing.py
 COPY train.py ./train.py
 COPY test.py ./test.py
